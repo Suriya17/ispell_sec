@@ -4,12 +4,30 @@ dist: trusty
 compiler: gcc
 script: sudo make all && sudo make install
 
+env:
+  global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    #   via the "travis encrypt" command using the project repo's public key
+    - secure: "MSisLBF40wekqPNa+gbbW22spmF/ZiJwO1TzwE/k7ExELS8523j/SR34ALwmddlbubeuk0TJdeNTe7aaqI6OPZn15foHnfKietPI3ybIah6/qrVUHkTY5Kh7Wp1x0en5pxi3fgavRY0mEJcGtFtjqeFgCXBZKIwRKrVLgU4JJNB6ceY28C99Yo98FWVTmConYFWmYErzVyISJUrXDFr+UjMaabxEEch6Dx695UcSWr/a7W3XInv0KcQvWJnZiiAjdnRlxSXCpR0AKjzxW/RVh+Uk2HI6VpJ4qOq5HDNKMHTQQ6wodDAWf4BUKKvHpgOZ7wxPnkGmuA/Ht5JDazd+OCGWtpwg5ad+ryxPBAy/BHZKnQCeXosos3FVkalSeNVau7JGFVxfwIF/bGywQPzm3DuM0BDhybwAHxe0c6q0jkPxCusFbyhmQunGls9uZg5g97kKLr9B1/n9nb77869Hgva3n08RG7eZ60V+IzC/im86TxOrGb3o4NTcoD4sM+xfJFLMwqt/zMuppJCNcaQcqsRDvv03dpsGStnaDEC0cUgHuXiTa3g5nQ9sL4vHY4rCfxr2FoyXrSjnawC1VGwLacULyQmL78iWwQsEVFBVWxa35scRKW9WjZkO9arqT4s16ZywZ5h9yUgNLvyAfxY3Bz62/TIMIbW47rD6e6VMs7E="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+
 addons:
   sonarcloud:
     organization: "suriya17"
     token:
       secure: "XwxGlOoqL3vaKulyM2sllyocDALxV8yReNk0xEqJpYk1djuNJHxdpML4FESAq8uJi7jbYhDvqWCVtKRXxKbnHoMegIsh63ldARVRzksDZiS/AJxZcLLAb8sSpxSEuldkvNKDTh1pV6Rj0Bg9/4qTPGPZ1pqStolHRYk8Bx8v/wWXwv5r9ZMcWtFdVzyAwbvUhM9Da26O378zz+nUR2Nq3vPpvz/dUNqjYDaMGjXYFtQMbjIMsKp0FHI7TIqypNRvRygB0Br8hM3EvVZAnnrw6cjdrd51SEQrhUnXuz11uFd1w7Yf/6XXuHWO5vuEu4EIx67b7OIjdtRTRW1uJCHoJ4tNx2mY0KRhFfrPgpRzCqY6fjYtGU8BN9m98M/VuXSH/EVjmwGlN0W4eoMVeGli+xSpcSBH975LMxyhevowchf4mnCdH6z3GmVlnatYLiI1Q0qci1+J4RxQB6IdzGdM3+OC2BkKdmXOzgyBosJ9oDjfHwsqbtVbvtsnmo8d5dwcXmeO3nO6GE/Od0F8tzXuoT50+xFpnXV/NtzSzB/N2IH3cNuZDR3ZKwiAQivLTdRyodb5MWtw6KarsgpauymDCwQ12+G1FeN1Vl1CZfzyjclcKOj0a578BjLCHmhV23lUTfsnnH7//AjptGNPfNMcdfZFfxjY9XM+cbc7ue5U9t8="
-
+  coverity_scan:
+    project:
+      name: "Suriya17/ispell_sec"
+      description: "<Your project description here>"
+    notification_email: suryateja836@gmail.com
+    build_command_prepend: ""
+    build_command: "make all"
+    branch_pattern: coverity_scan
+    
 script:
   - make clean
   # Wraps the compilation with the Build Wrapper to generate configuration (used
