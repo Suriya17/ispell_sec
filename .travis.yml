@@ -15,10 +15,10 @@ before_install:
 
 
 addons:
-  sonarcloud:
-    organization: "suriya17"
-    token:
-      secure: "XwxGlOoqL3vaKulyM2sllyocDALxV8yReNk0xEqJpYk1djuNJHxdpML4FESAq8uJi7jbYhDvqWCVtKRXxKbnHoMegIsh63ldARVRzksDZiS/AJxZcLLAb8sSpxSEuldkvNKDTh1pV6Rj0Bg9/4qTPGPZ1pqStolHRYk8Bx8v/wWXwv5r9ZMcWtFdVzyAwbvUhM9Da26O378zz+nUR2Nq3vPpvz/dUNqjYDaMGjXYFtQMbjIMsKp0FHI7TIqypNRvRygB0Br8hM3EvVZAnnrw6cjdrd51SEQrhUnXuz11uFd1w7Yf/6XXuHWO5vuEu4EIx67b7OIjdtRTRW1uJCHoJ4tNx2mY0KRhFfrPgpRzCqY6fjYtGU8BN9m98M/VuXSH/EVjmwGlN0W4eoMVeGli+xSpcSBH975LMxyhevowchf4mnCdH6z3GmVlnatYLiI1Q0qci1+J4RxQB6IdzGdM3+OC2BkKdmXOzgyBosJ9oDjfHwsqbtVbvtsnmo8d5dwcXmeO3nO6GE/Od0F8tzXuoT50+xFpnXV/NtzSzB/N2IH3cNuZDR3ZKwiAQivLTdRyodb5MWtw6KarsgpauymDCwQ12+G1FeN1Vl1CZfzyjclcKOj0a578BjLCHmhV23lUTfsnnH7//AjptGNPfNMcdfZFfxjY9XM+cbc7ue5U9t8="
+  # sonarcloud:
+  #   organization: "suriya17"
+  #   token:
+  #     secure: "XwxGlOoqL3vaKulyM2sllyocDALxV8yReNk0xEqJpYk1djuNJHxdpML4FESAq8uJi7jbYhDvqWCVtKRXxKbnHoMegIsh63ldARVRzksDZiS/AJxZcLLAb8sSpxSEuldkvNKDTh1pV6Rj0Bg9/4qTPGPZ1pqStolHRYk8Bx8v/wWXwv5r9ZMcWtFdVzyAwbvUhM9Da26O378zz+nUR2Nq3vPpvz/dUNqjYDaMGjXYFtQMbjIMsKp0FHI7TIqypNRvRygB0Br8hM3EvVZAnnrw6cjdrd51SEQrhUnXuz11uFd1w7Yf/6XXuHWO5vuEu4EIx67b7OIjdtRTRW1uJCHoJ4tNx2mY0KRhFfrPgpRzCqY6fjYtGU8BN9m98M/VuXSH/EVjmwGlN0W4eoMVeGli+xSpcSBH975LMxyhevowchf4mnCdH6z3GmVlnatYLiI1Q0qci1+J4RxQB6IdzGdM3+OC2BkKdmXOzgyBosJ9oDjfHwsqbtVbvtsnmo8d5dwcXmeO3nO6GE/Od0F8tzXuoT50+xFpnXV/NtzSzB/N2IH3cNuZDR3ZKwiAQivLTdRyodb5MWtw6KarsgpauymDCwQ12+G1FeN1Vl1CZfzyjclcKOj0a578BjLCHmhV23lUTfsnnH7//AjptGNPfNMcdfZFfxjY9XM+cbc7ue5U9t8="
   coverity_scan:
     project:
       name: "Suriya17/ispell_sec"
@@ -27,12 +27,12 @@ addons:
     build_command_prepend: ""
     build_command: "make all"
     branch_pattern: coverity_scan
-    
-script:
-  - make clean
-  # Wraps the compilation with the Build Wrapper to generate configuration (used
-  # later by the SonarQube Scanner) into the "bw-output" folder
-  - build-wrapper-linux-x86-64 --out-dir bw-output make all
-  # And finally run the SonarQube analysis - read the "sonar-project.properties"
-  # file to see the specific configuration
-  - sonar-scanner
+
+# script:
+#   - make clean
+#   # Wraps the compilation with the Build Wrapper to generate configuration (used
+#   # later by the SonarQube Scanner) into the "bw-output" folder
+#   - build-wrapper-linux-x86-64 --out-dir bw-output make all
+#   # And finally run the SonarQube analysis - read the "sonar-project.properties"
+#   # file to see the specific configuration
+#   - sonar-scanner
